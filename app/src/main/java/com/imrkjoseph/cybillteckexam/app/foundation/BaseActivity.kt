@@ -1,4 +1,4 @@
-package com.imrkjoseph.cybillteckexam.app
+package com.imrkjoseph.cybillteckexam.app.foundation
 
 import android.os.Bundle
 import android.view.LayoutInflater
