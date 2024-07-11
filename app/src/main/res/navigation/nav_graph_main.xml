@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/person_list_fragment">
+
+    <fragment
+        android:id="@+id/person_list_fragment"
+        android:name="com.imrkjoseph.cybillteckexam.persons.list.PersonListFragment"
+        android:label="fragment_person_list"
+        tools:layout="@layout/fragment_person_list">
+
+        <action
+            android:id="@+id/action_to_person_details_screen"
+            app:destination="@id/person_details_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/person_details_fragment"
+        android:name="com.imrkjoseph.cybillteckexam.persons.details.PersonDetailsFragment"
+        android:label="fragment_person_details"
+        tools:layout="@layout/fragment_person_details" />
+</navigation>
