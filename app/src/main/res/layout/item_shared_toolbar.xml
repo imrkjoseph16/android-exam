@@ -32,8 +32,10 @@
             <TextView
                 style="@style/WrapContent"
                 android:text="@{dto.title.getString(context)}"
-                bind:setTextSize="@{dto.titleSize}"
-                android:layout_gravity="center"/>
+                android:textColor="@color/text_color"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                bind:setTextSize="@{dto.titleSize}"/>
         </androidx.appcompat.widget.Toolbar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

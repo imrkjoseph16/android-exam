@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CybillTeckExam" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="Theme.CybillTeckExam" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+    </style>
 
     <style name="MatchParent">
         <item name="android:layout_width">match_parent</item>

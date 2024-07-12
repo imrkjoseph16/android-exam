@@ -21,7 +21,7 @@ class PersonListFactory @Inject constructor() {
         add(element = setupSectionTitle(textRes = R.string.title_persons_list, textSize = 32F))
 
         // Person Lists
-        add(element = SpaceItemViewDto(R.dimen.distance_16x))
+        add(element = SpaceItemViewDto(R.dimen.distance_30x))
         setupPersonList(data = results)
     }
 
@@ -38,7 +38,7 @@ class PersonListFactory @Inject constructor() {
                             itemId = id,
                             firstLine = TextLine(
                                 text = "${details.name?.first} ${details.name?.last}",
-                                textRes = R.string.title_full_name
+                                textRes = R.string.title_name
                             ),
                             secondLine = TextLine(
                                 text = details.email,

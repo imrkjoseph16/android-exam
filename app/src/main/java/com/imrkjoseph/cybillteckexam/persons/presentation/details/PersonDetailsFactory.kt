@@ -27,14 +27,20 @@ class PersonDetailsFactory @Inject constructor(
         details?.let { result ->
             with(result) {
                 // Avatar
-                add(element = SpaceItemViewDto(R.dimen.distance_24x))
+                add(element = SpaceItemViewDto(R.dimen.distance_30x))
                 add(element = AvatarItemViewDto(avatarUrl = picture?.large))
+
+                // Full name
+                setupTitleItem(
+                    textRes = R.string.title_full_name,
+                    text = "${name?.title}. ${name?.first} ${name?.last}",
+                    spaceHeight = R.dimen.distance_34x
+                )
 
                 // First name
                 setupTitleItem(
                     textRes = R.string.title_first_name,
-                    text = "${name?.title}. ${name?.first}",
-                    spaceHeight = R.dimen.distance_30x
+                    text = name?.first
                 )
 
                 // Last name
@@ -58,6 +64,9 @@ class PersonDetailsFactory @Inject constructor(
                     formatDate = YEAR_DAY_MONTH_TIMEZONE).toString()
                 )
 
+                // Last name
+                setupTitleItem(textRes = R.string.title_gender, text = gender)
+
                 // Email Address
                 setupTitleItem(textRes = R.string.title_email, text = email)
 
@@ -65,7 +74,7 @@ class PersonDetailsFactory @Inject constructor(
                 setupTitleItem(textRes = R.string.title_mobile_number, text = cell)
 
                 // Home Address
-                setupTitleItem( textRes = R.string.title_address, text = location?.buildStreetAddress())
+                setupTitleItem(textRes = R.string.title_address, text = location?.buildStreetAddress())
             }
         }
     }
@@ -75,7 +84,7 @@ class PersonDetailsFactory @Inject constructor(
     private fun MutableList<Any>.setupTitleItem(
         text: String? = null,
         @StringRes textRes: Int? = null,
-        @DimenRes spaceHeight: Int = R.dimen.distance_8x
+        @DimenRes spaceHeight: Int = R.dimen.distance_16x
     ) {
         add(element = SpaceItemViewDto(spaceHeight))
         add(element = TitleItemViewDto(title = TextLine(
