@@ -18,7 +18,7 @@
 
     <include
         android:id="@+id/widget_loading"
-        layout="@layout/shared_widget_loading"
+        layout="@layout/widget_shared_loading"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

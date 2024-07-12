@@ -26,7 +26,7 @@ class PersonListFactory @Inject constructor() {
     }
 
     private fun MutableList<Any>.setupPersonList(data: List<Result>?) {
-        data?.sortedBy { it.name.first }?.mapIndexed { index, details ->
+        data?.sortedBy { it.name?.first }?.mapIndexed { index, details ->
             details.id.value?.let { id ->
                 // Person Lists
                 add(element = PersonListItem(
@@ -34,7 +34,7 @@ class PersonListFactory @Inject constructor() {
                         dto = ListItemViewDto(
                             itemId = id,
                             firstLine = TextLine(
-                                text = "${details.name.first} ${details.name.last}",
+                                text = "${details.name?.first} ${details.name?.last}",
                                 textRes = R.string.title_full_name
                             ),
                             secondLine = TextLine(
@@ -45,7 +45,7 @@ class PersonListFactory @Inject constructor() {
                                 text = details.gender,
                                 textRes = R.string.title_gender
                             ),
-                            avatarUrl = details.picture.large,
+                            avatarUrl = details.picture?.large,
                             showDivider = index != data.size -1
                         )
                     )

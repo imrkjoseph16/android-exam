@@ -2,10 +2,12 @@ package com.imrkjoseph.cybillteckexam.persons.presentation.details
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.imrkjoseph.cybillteckexam.app.component.CustomRecyclerView
 import com.imrkjoseph.cybillteckexam.app.foundation.BaseFragment
 import com.imrkjoseph.cybillteckexam.app.shared.binder.SpaceItemViewDtoBinder
 import com.imrkjoseph.cybillteckexam.app.shared.binder.setupAvatarItemBinder
+import com.imrkjoseph.cybillteckexam.app.shared.binder.setupToolbarItemBinder
 import com.imrkjoseph.cybillteckexam.app.shared.binder.setupTitleItemBinder
 import com.imrkjoseph.cybillteckexam.databinding.FragmentPersonDetailsBinding
 import com.imrkjoseph.cybillteckexam.persons.presentation.list.PersonState
@@ -34,6 +36,9 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding>(binding
         addItemBindings(viewHolders = SpaceItemViewDtoBinder)
         addItemBindings(viewHolders = setupTitleItemBinder())
         addItemBindings(viewHolders = setupAvatarItemBinder())
+        addItemBindings(viewHolders = setupToolbarItemBinder(
+            onBackClicked = findNavController()::popBackStack
+        ))
     }
 
     private fun setupObserver() {

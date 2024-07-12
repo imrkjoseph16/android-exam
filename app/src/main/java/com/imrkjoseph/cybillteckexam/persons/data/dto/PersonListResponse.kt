@@ -7,67 +7,62 @@ import kotlinx.parcelize.Parcelize
 
 data class PersonListResponse(
     @JsonProperty("info")
-    val info: Info? = null,
+    var info: Info? = null,
 
     @JsonProperty("results")
-    val results: List<Result>
+    var results: List<Result> = emptyList()
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Info(
     @JsonProperty("page")
-    val page: Int,
+    val page: Int? = null,
 
     @JsonProperty("results")
-    val results: Int,
-
-    @JsonProperty("seed")
-    val seed: String,
-
-    @JsonProperty("version")
-    val version: String
+    val results: Int? = null
 )
 
 @Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Result(
-    @JsonProperty("cell")
-    val cell: String,
-
-    @JsonProperty("dob")
-    val dob: Dob,
-
-    @JsonProperty("email")
-    val email: String,
-
-    @JsonProperty("gender")
-    val gender: String,
-
     @JsonProperty("id")
     val id: Id,
 
+    @JsonProperty("cell")
+    val cell: String? = null,
+
+    @JsonProperty("dob")
+    val dob: Dob? = null,
+
+    @JsonProperty("email")
+    val email: String? = null,
+
+    @JsonProperty("gender")
+    val gender: String? = null,
+
     @JsonProperty("location")
-    val location: Location,
+    val location: Location? = null,
 
     @JsonProperty("name")
-    val name: Name,
+    val name: Name? = null,
 
     @JsonProperty("nat")
-    val nat: String,
+    val nat: String? = null,
 
     @JsonProperty("phone")
-    val phone: String,
+    val phone: String? = null,
 
     @JsonProperty("picture")
-    val picture: Picture
+    val picture: Picture? = null
 )  : Parcelable
 
 @Parcelize
 data class Dob(
     @JsonProperty("age")
-    val age: Int,
+    val age: Int? = null,
 
     @JsonProperty("date")
-    val date: String
+    val date: String? = null
 ) : Parcelable
 
 @Parcelize
@@ -83,47 +78,47 @@ data class Id(
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Location(
     @JsonProperty("city")
-    val city: String,
+    val city: String? = null,
 
     @JsonProperty("country")
-    val country: String,
+    val country: String? = null,
 
     @JsonProperty("state")
-    val state: String,
+    val state: String? = null,
 
     @JsonProperty("street")
-    val street: Street
+    val street: Street? = null
 ) : Parcelable
 
 @Parcelize
 data class Name(
     @JsonProperty("first")
-    val first: String,
+    val first: String? = null,
 
     @JsonProperty("last")
-    val last: String,
+    val last: String? = null,
 
     @JsonProperty("title")
-    val title: String
+    val title: String? = null
 ) : Parcelable
 
 @Parcelize
 data class Picture(
     @JsonProperty("large")
-    val large: String,
+    val large: String? = null,
 
     @JsonProperty("medium")
-    val medium: String,
+    val medium: String? = null,
 
     @JsonProperty("thumbnail")
-    val thumbnail: String
+    val thumbnail: String? = null
 ) : Parcelable
 
 @Parcelize
 data class Street(
     @JsonProperty("name")
-    val name: String,
+    val name: String? = null,
 
     @JsonProperty("number")
-    val number: Long
+    val number: Long? = null
 ) : Parcelable

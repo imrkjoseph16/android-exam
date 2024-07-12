@@ -11,6 +11,6 @@
     <string name="title_age">Age:</string>
     <string name="title_email">Email:</string>
     <string name="title_mobile_number">Mobile number:</string>
-    <string name="title_address">Home Address:</string>
+    <string name="title_address">Home address:</string>
     <string name="title_gender">Gender:</string>
 </resources>

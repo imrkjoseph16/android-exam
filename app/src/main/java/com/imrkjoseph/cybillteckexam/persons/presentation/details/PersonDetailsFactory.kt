@@ -7,6 +7,7 @@ import com.imrkjoseph.cybillteckexam.app.component.TextLine
 import com.imrkjoseph.cybillteckexam.app.shared.dto.AvatarItemViewDto
 import com.imrkjoseph.cybillteckexam.app.shared.dto.SpaceItemViewDto
 import com.imrkjoseph.cybillteckexam.app.shared.dto.TitleItemViewDto
+import com.imrkjoseph.cybillteckexam.app.shared.dto.ToolbarItemViewDto
 import com.imrkjoseph.cybillteckexam.app.util.Default.Companion.MONTH_DAY_YEAR
 import com.imrkjoseph.cybillteckexam.app.util.Default.Companion.YEAR_DAY_MONTH_TIMEZONE
 import com.imrkjoseph.cybillteckexam.app.util.ViewUtil
@@ -19,53 +20,61 @@ class PersonDetailsFactory @Inject constructor(
 ) {
 
     fun createOverview(details: Result?) = buildList {
-        // Title
-        add(element = SpaceItemViewDto(R.dimen.distance_24x))
-        add(element = TitleItemViewDto(title = TextLine(textRes = R.string.title_person_details), textSize = 28F))
+        // Toolbar
+        add(element = ToolbarItemViewDto(title = TextLine(textRes = R.string.title_person_details), titleSize = 24F))
 
+        // Title
         details?.let { result ->
             with(result) {
                 // Avatar
                 add(element = SpaceItemViewDto(R.dimen.distance_24x))
-                add(element = AvatarItemViewDto(avatarUrl = picture.large))
+                add(element = AvatarItemViewDto(avatarUrl = picture?.large))
 
                 // First name
                 setupTitleItem(
-                    text = "${name.title}. ${name.first}",
                     textRes = R.string.title_first_name,
+                    text = "${name?.title}. ${name?.first}",
                     spaceHeight = R.dimen.distance_30x
                 )
 
                 // Last name
-                setupTitleItem(text = name.last, textRes = R.string.title_last_name)
+                setupTitleItem(textRes = R.string.title_last_name, text = name?.last)
 
                 // Birthday
-                setupTitleItem(text = viewUtil.convertStringDate(
+                setupTitleItem(
+                    textRes = R.string.title_birthday,
+                    text = viewUtil.convertStringDate(
                     formatDate = YEAR_DAY_MONTH_TIMEZONE,
                     desiredFormat = MONTH_DAY_YEAR,
-                    inputDate = dob.date
-                ), textRes = R.string.title_birthday)
+                    inputDate = dob?.date
+                    )
+                )
 
                 // Age
-                setupTitleItem(text = dob.age.toString(), textRes = R.string.title_age)
+                setupTitleItem(
+                    textRes = R.string.title_age,
+                    text = viewUtil.calculateAge(
+                    birthDate = dob?.date,
+                    formatDate = YEAR_DAY_MONTH_TIMEZONE).toString()
+                )
 
                 // Email Address
-                setupTitleItem(text = email, textRes = R.string.title_email)
+                setupTitleItem(textRes = R.string.title_email, text = email)
 
                 // Mobile Number
-                setupTitleItem(text = cell, textRes = R.string.title_mobile_number)
+                setupTitleItem(textRes = R.string.title_mobile_number, text = cell)
 
                 // Home Address
-                setupTitleItem(text = location.buildStreetAddress(), textRes = R.string.title_address)
+                setupTitleItem( textRes = R.string.title_address, text = location?.buildStreetAddress())
             }
         }
     }
 
-    private fun Location.buildStreetAddress() = "${street.number} ${street.name}, $state $city, $country"
+    private fun Location.buildStreetAddress() = "${street?.number} ${street?.name}, $state $city, $country"
 
     private fun MutableList<Any>.setupTitleItem(
-        text: String,
-        @StringRes textRes: Int,
+        text: String? = null,
+        @StringRes textRes: Int? = null,
         @DimenRes spaceHeight: Int = R.dimen.distance_8x
     ) {
         add(element = SpaceItemViewDto(spaceHeight))
