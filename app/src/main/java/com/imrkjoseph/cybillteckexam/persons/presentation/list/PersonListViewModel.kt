@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.imrkjoseph.cybillteckexam.app.shared.extension.coRunCatching
 import com.imrkjoseph.cybillteckexam.app.shared.local.domain.DatabaseUseCase
+import com.imrkjoseph.cybillteckexam.app.util.NetworkUtil
 import com.imrkjoseph.cybillteckexam.persons.data.dto.PersonListResponse
 import com.imrkjoseph.cybillteckexam.persons.domain.PersonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,10 +19,9 @@ import javax.inject.Inject
 class PersonListViewModel @Inject constructor(
     private val personUseCase: PersonUseCase,
     private val factory: PersonListFactory,
-    private val localUseCase: DatabaseUseCase
+    private val localUseCase: DatabaseUseCase,
+    private val networkUtil: NetworkUtil
 ) : ViewModel() {
-
-    private var currentPage = 1
 
     private val _uiState = MutableStateFlow(value = PersonState())
 
@@ -33,10 +33,10 @@ class PersonListViewModel @Inject constructor(
 
     private fun getCachedPersonLists() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            val cachedList = localUseCase.getPersonList(page = currentPage)
+            val cachedList = localUseCase.getPersonList(page = _uiState.value.currentPage)
             // Check if the cached details is not empty,
             // it means the response is already saved in local database.
-            if (cachedList.results.isNotEmpty()) handlePersonListResult(result = cachedList)
+            if (cachedList.results.isNotEmpty() || networkUtil.isNetworkAvailable().not()) handlePersonListResult(result = cachedList)
             // Fetching from API.
             else getPersonList()
         }
@@ -47,7 +47,7 @@ class PersonListViewModel @Inject constructor(
             _uiState.update { it.copy(loading = true) }
 
             coRunCatching {
-                personUseCase.getPersonList(page = currentPage)
+                personUseCase.getPersonList(page = _uiState.value.currentPage)
             }.onSuccess { response ->
                 // Handle person list response.
                 handlePersonListResult(result = response)
@@ -71,18 +71,51 @@ class PersonListViewModel @Inject constructor(
         }
     }
 
-    private fun handlePersonListResult(result: PersonListResponse) = getUiItems(response = result)
+    fun clearCachedData() {
+        if (networkUtil.isNetworkAvailable()) {
+            viewModelScope.launch(context = Dispatchers.IO) {
+                coRunCatching {
+                    localUseCase.clearCachedData()
+                }.onSuccess {
+                    // Reset the currentPage into 1 and set an emptyList,
+                    // to cachedList since we cleared the cached data.
+                    _uiState.update {
+                        it.copy(
+                            currentPage = 1,
+                            cachedPersonList = mutableListOf()
+                        )
+                    }
+                    getCachedPersonLists()
+                }
+            }
+        } else {
+            _uiState.update { it.copy(error = Throwable()) }
+        }
+    }
+
+    private fun handlePersonListResult(result: PersonListResponse) {
+        with(_uiState.value) {
+            cachedPersonList.addAll(result.results)
+
+            getUiItems(response = PersonListResponse(
+                info = result.info,
+                results = cachedPersonList
+            ))
+        }
+    }
+
+    fun executeListPagination() {
+        _uiState.value.currentPage += 1
+        getCachedPersonLists()
+    }
 
     private fun getUiItems(response: PersonListResponse) {
         factory.createOverview(data = response).also { uiItems ->
             _uiState.update {
-                it.copy(
-                    response = response,
-                    uiItems = uiItems
-                )
+                it.copy(uiItems = uiItems)
             }
         }
     }
 
-    fun getPersonDetails(id: String) = uiState.value.response?.results?.find { it.id.value == id }
+    fun getPersonDetails(id: String) = uiState.value.cachedPersonList.find { it.id.value == id }
 }

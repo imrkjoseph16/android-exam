@@ -62,6 +62,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     // Room components
     implementation("androidx.room:room-runtime:2.6.1")

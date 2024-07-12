@@ -3,6 +3,7 @@ package com.imrkjoseph.cybillteckexam.persons.presentation.list
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.imrkjoseph.cybillteckexam.app.component.CustomRecyclerView
 import com.imrkjoseph.cybillteckexam.app.foundation.BaseFragment
 import com.imrkjoseph.cybillteckexam.app.shared.binder.PersonListItem
@@ -29,10 +30,12 @@ class PersonListFragment : BaseFragment<FragmentPersonListBinding>(bindingInflat
     }
 
     private fun FragmentPersonListBinding.setupComponents() {
+        pullRefresh.setOnRefreshListener(viewModel::clearCachedData)
         personList.setupPersonList()
     }
 
     private fun CustomRecyclerView.setupPersonList() {
+        addScrollObservable()
         addItemBindings(viewHolders = SpaceItemViewDtoBinder)
         addItemBindings(viewHolders = setupTitleItemBinder())
         addItemBindings(viewHolders = setupPersonListItemBinder(
@@ -41,6 +44,21 @@ class PersonListFragment : BaseFragment<FragmentPersonListBinding>(bindingInflat
                 navigateToDetailScreen(personId = dto.itemId)
             }
         ))
+    }
+
+    private fun RecyclerView.addScrollObservable() {
+        addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                with(viewModel) {
+                    if (recyclerView.canScrollVertically(1).not()
+                        && newState == RecyclerView.SCROLL_STATE_IDLE
+                        && binding.pullRefresh.isRefreshing.not()) {
+                        executeListPagination()
+                    }
+                }
+            }
+        })
     }
 
     private fun setupObserver() {
@@ -54,8 +72,11 @@ class PersonListFragment : BaseFragment<FragmentPersonListBinding>(bindingInflat
     }
 
     private fun PersonState.updateUi() {
-        updateLoadingState(isShow = loading)
-        binding.personList.setItems(items = uiItems)
+        with(binding) {
+            updateLoadingState(isShow = loading)
+            pullRefresh.isRefreshing = false
+            personList.setItems(items = uiItems)
+        }
     }
 
     private fun updateLoadingState(isShow: Boolean) = binding.widgetLoading.root.setVisible(canShow = isShow)

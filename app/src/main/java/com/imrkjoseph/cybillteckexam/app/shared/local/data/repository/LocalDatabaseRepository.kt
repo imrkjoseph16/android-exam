@@ -12,9 +12,13 @@ class LocalDatabaseRepository @Inject constructor(
 
     private val localClient = databaseService.personsDao()
 
-    suspend fun getPersonList(page: Int) =  localTransformer.transformLocalToResponse(result = localClient.getPersonList(page))
+    suspend fun getPersonList(page: Int) = localTransformer.transformLocalToResponse(result = localClient.getPersonList(page))
 
     suspend fun saveLocalPersonLists(response: PersonListResponse?) = localClient.saveLocalPersonLists(
         personLists = localTransformer.transformResponseToLocal(response = response)
     )
+
+    suspend fun clearCachedData() = localClient.clearCachedData()
+
+    suspend fun getTotalCachedList() = localClient.getTotalCachedList()
 }

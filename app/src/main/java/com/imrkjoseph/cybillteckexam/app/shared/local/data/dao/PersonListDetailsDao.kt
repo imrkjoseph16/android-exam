@@ -15,4 +15,10 @@ interface PersonListDetailsDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveLocalPersonLists(personLists: LocalPersonLists) : Long
+
+    @Query("DELETE FROM $DB_PERSON_LIST")
+    suspend fun clearCachedData()
+
+    @Query("SELECT COUNT(id) FROM $DB_PERSON_LIST")
+    suspend fun getTotalCachedList(): Int
 }
