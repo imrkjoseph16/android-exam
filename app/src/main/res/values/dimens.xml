@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="distance_0x">0dp</dimen>
+    <dimen name="distance_2x">2dp</dimen>
     <dimen name="distance_6x">6dp</dimen>
     <dimen name="distance_8x">8dp</dimen>
     <dimen name="distance_10x">10dp</dimen>

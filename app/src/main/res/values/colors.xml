@@ -10,5 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#EA0F0F</color>
     <color name="light_gray">#AAAAAA</color>
+    <color name="transparent">#00000000</color>
     <color name="transparent_light">#AE000000</color>
 </resources>

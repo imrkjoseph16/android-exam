@@ -26,8 +26,11 @@ class PersonListFactory @Inject constructor() {
     }
 
     private fun MutableList<Any>.setupPersonList(data: List<Result>?) {
-        data?.sortedBy { it.name?.first }?.mapIndexed { index, details ->
+        data?.sortedBy { it.name?.first }?.map { details ->
             details.id.value?.let { id ->
+                // Alphabetical Letter
+                setupAlphabeticalLetters(details.name?.first?.first().toString())
+
                 // Person Lists
                 add(element = PersonListItem(
                         id = id,
@@ -45,13 +48,19 @@ class PersonListFactory @Inject constructor() {
                                 text = details.gender,
                                 textRes = R.string.title_gender
                             ),
-                            avatarUrl = details.picture?.large,
-                            showDivider = index != data.size -1
+                            avatarUrl = details.picture?.large
                         )
                     )
                 )
+
+                add(element = SpaceItemViewDto(R.dimen.distance_12x))
             }
         }
+    }
+
+    private fun MutableList<Any>.setupAlphabeticalLetters(letter: String) {
+        val alphabeticalOrderItem = setupSectionTitle(text = letter, textSize = 18F)
+        if (this.contains(alphabeticalOrderItem).not()) add(element = alphabeticalOrderItem)
     }
 
     private fun setupSectionTitle(

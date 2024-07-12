@@ -9,12 +9,12 @@
     <com.imrkjoseph.cybillteckexam.app.component.CustomRecyclerView
         style="@style/ConstraintParent"
         android:id="@+id/person_list"
-        android:paddingBottom="@dimen/distance_8x"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_shared_list"/>
 
     <include
         android:id="@+id/widget_loading"

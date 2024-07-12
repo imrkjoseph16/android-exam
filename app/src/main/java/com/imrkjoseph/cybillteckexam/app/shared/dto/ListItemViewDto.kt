@@ -12,6 +12,5 @@ data class ListItemViewDto(
     val firstLine: TextLine? = TextLine.EMPTY,
     val secondLine: TextLine? = TextLine.EMPTY,
     val thirdLine: TextLine? = TextLine.EMPTY,
-    val avatarUrl: String? = null,
-    val showDivider: Boolean = false
+    val avatarUrl: String? = null
 )

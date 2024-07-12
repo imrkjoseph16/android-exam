@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/MatchWrapContent"
-        android:layout_marginHorizontal="@dimen/distance_12x">
+        android:layout_marginHorizontal="@dimen/distance_16x">
 
         <TextView
             android:id="@+id/title"
