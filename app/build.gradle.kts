@@ -3,6 +3,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -60,6 +62,12 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Circle ImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Coil Image
+    implementation("io.coil-kt:coil:2.4.0")
 
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")

@@ -4,15 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/MatchParent"
-    tools:context=".persons.list.PersonListFragment">
+    tools:context=".persons.presentation.list.PersonListFragment">
 
     <com.imrkjoseph.cybillteckexam.app.component.CustomRecyclerView
         style="@style/ConstraintParent"
         android:id="@+id/person_list"
+        android:paddingBottom="@dimen/distance_8x"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <include
+        android:id="@+id/widget_loading"
+        layout="@layout/shared_widget_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
