@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dto"
+            type="com.imrkjoseph.cybillteckexam.app.shared.dto.ToolbarItemViewDto" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchWrapContent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/arrow_back"
+                android:layout_width="@dimen/arrow_back_width"
+                android:layout_height="@dimen/arrow_back_height"
+                android:layout_margin="@dimen/distance_16x"
+                android:background="@drawable/ic_arrow_back_24px"/>
+
+            <TextView
+                style="@style/WrapContent"
+                android:text="@{dto.title.getString(context)}"
+                android:textColor="@color/text_color"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                bind:setTextSize="@{dto.titleSize}"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

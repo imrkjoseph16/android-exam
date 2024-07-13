@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="dto"
+            type="com.imrkjoseph.cybillteckexam.app.shared.dto.SpaceItemViewDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchWrapContent">
+
+        <View
+            style="@style/MatchParent"
+            android:layout_marginHorizontal="@dimen/distance_16x"
+            bind:setCustomHeight="@{dto.heightDimenRes}"
+            bind:setBackgroundColor="@{dto.backgroundColor}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

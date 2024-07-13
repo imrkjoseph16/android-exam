@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dto"
+            type="com.imrkjoseph.cybillteckexam.app.shared.dto.ListItemViewDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/RippleView">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/person_list_avatar_width"
+            android:layout_height="@dimen/person_list_avatar_height"
+            android:layout_margin="@dimen/distance_16x"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:loadUrl="@{dto.avatarUrl}" />
+
+        <TextView
+            android:id="@+id/first_line"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/distance_16x"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@{dto.firstLine.getString(context)}"
+            android:textColor="@color/text_color"
+            bind:visible="@{dto.firstLine != null}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="@+id/profile_image"
+            app:layout_constraintBottom_toTopOf="@+id/second_line"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            tools:text="First Line" />
+
+        <TextView
+            android:id="@+id/second_line"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/distance_16x"
+            android:layout_marginTop="@dimen/distance_8x"
+            android:text="@{dto.secondLine.getString(context)}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_color"
+            app:layout_constraintBottom_toTopOf="@+id/third_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/first_line"
+            bind:visible="@{dto.secondLine != null}"
+            tools:text="Second Line" />
+
+        <TextView
+            android:id="@+id/third_line"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/distance_16x"
+            android:layout_marginVertical="@dimen/distance_6x"
+            android:text="@{dto.thirdLine.getString(context)}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_color"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/second_line"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            bind:visible="@{dto.secondLine != null}"
+            tools:text="Third Line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

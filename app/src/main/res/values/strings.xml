@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Person List</string>
+
+    <string name="title_persons_list">Persons List</string>
+    <string name="title_person_details">Persons Details</string>
+
+    <string name="title_full_name">Full name:</string>
+    <string name="title_first_name">First name:</string>
+    <string name="title_last_name">Last name:</string>
+    <string name="title_name">Name:</string>
+    <string name="title_birthday">Birthday:</string>
+    <string name="title_age">Age:</string>
+    <string name="title_email">Email:</string>
+    <string name="title_mobile_number">Mobile number:</string>
+    <string name="title_address">Home address:</string>
+    <string name="title_gender">Gender:</string>
+</resources>
