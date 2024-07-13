@@ -28,9 +28,7 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding>(binding
         }
     }
 
-    private fun FragmentPersonDetailsBinding.setupComponents() {
-        detailsList.setupPersonDetails()
-    }
+    private fun FragmentPersonDetailsBinding.setupComponents() = detailsList.setupPersonDetails()
 
     private fun CustomRecyclerView.setupPersonDetails() {
         addItemBindings(viewHolders = SpaceItemViewDtoBinder)

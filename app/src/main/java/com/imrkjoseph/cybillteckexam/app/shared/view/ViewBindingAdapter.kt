@@ -9,6 +9,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import coil.load
 import de.hdodenhof.circleimageview.CircleImageView
+
 @BindingAdapter("visible")
 fun setVisible(view: View, visible: Boolean) {
     view.isVisible = visible
@@ -16,9 +17,7 @@ fun setVisible(view: View, visible: Boolean) {
 
 @BindingAdapter("loadUrl")
 fun loadUrl(view: CircleImageView, url: String?) {
-    url?.let { it ->
-        view.load(it)
-    }
+    url?.let(view::load)
 }
 
 @BindingAdapter("setCustomHeight")
